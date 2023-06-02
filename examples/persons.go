@@ -24,7 +24,7 @@ func main() {
 	// 	Space: "0",
 	// 	Images: []vision.MetaImageSet{
 	// 		{
-	// 			Name:     "rach.jpeg",
+	// 			Name:     "test_imgs/rach.jpeg",
 	// 			PersonId: 1,
 	// 		},
 	// 	},
@@ -34,7 +34,7 @@ func main() {
 		Space: "0",
 		Images: []vision.MetaImageRecognize{
 			{
-				Name: "friends.jpg",
+				Name: "test_imgs/friends.jpg",
 			},
 		},
 		CreateNew:       false,
@@ -53,7 +53,7 @@ func main() {
 	// 	Space: "0",
 	// 	Images: []vision.MetaImageSet{
 	// 		{
-	// 			Name:     "rach.jpeg",
+	// 			Name:     "test_imgs/rach.jpeg",
 	// 			PersonId: 1,
 	// 		},
 	// 	},
