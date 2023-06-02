@@ -4,18 +4,18 @@ import (
 	"log"
 )
 
-//==========================================================
-//==========================SET=============================
-//==========================================================
-
-type MetaImageSet struct {
+type ImageMeta struct {
 	Name     string `json:"name"`
 	PersonId int    `json:"person_id"`
 }
 
+//==========================================================
+//==========================SET=============================
+//==========================================================
+
 type MetaSet struct {
-	Space  string         `json:"space"`
-	Images []MetaImageSet `json:"images"`
+	Space  string      `json:"space"`
+	Images []ImageMeta `json:"images"`
 }
 
 type ResponseSetOk struct {
@@ -46,15 +46,11 @@ func (vision *visionClient) PersonsSet(meta MetaSet) (*ResponseSetOk, *ResponseE
 //========================RECOGNIZE=========================
 //==========================================================
 
-type MetaImageRecognize struct {
-	Name string `json:"name"`
-}
-
 type MetaRecognize struct {
-	Space           string               `json:"space"`
-	Images          []MetaImageRecognize `json:"images"`
-	CreateNew       bool                 `json:"create_new"`
-	UpdateEmbedding bool                 `json:"update_embedding"`
+	Space           string      `json:"space"`
+	Images          []ImageMeta `json:"images"`
+	CreateNew       bool        `json:"create_new"`
+	UpdateEmbedding bool        `json:"update_embedding"`
 }
 
 type ResponseRecognizeOk struct {
@@ -102,8 +98,8 @@ func (vision *visionClient) PersonsRecognize(meta MetaRecognize) (*ResponseRecog
 //==========================================================
 
 type MetaDelete struct {
-	Space  string         `json:"space"`
-	Images []MetaImageSet `json:"images"`
+	Space  string      `json:"space"`
+	Images []ImageMeta `json:"images"`
 }
 
 type ResponseDeleteOk struct {

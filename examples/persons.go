@@ -20,9 +20,9 @@ func main() {
 
 	vis := vision.NewVisionClient(token)
 
-	// vis.PersonsSet(vision.MetaSet{
+	// respOk, respErr := vis.PersonsSet(vision.MetaSet{
 	// 	Space: "0",
-	// 	Images: []vision.MetaImageSet{
+	// 	Images: []vision.ImageMeta{
 	// 		{
 	// 			Name:     "test_imgs/rach.jpeg",
 	// 			PersonId: 1,
@@ -30,9 +30,16 @@ func main() {
 	// 	},
 	// })
 
+	// if respErr != nil {
+	// 	fmt.Printf("error: %s\n", respErr.Body)
+	// } else {
+	// 	fmt.Println("Ok")
+	// 	fmt.Println(respOk)
+	// }
+
 	respOk, respErr := vis.PersonsRecognize(vision.MetaRecognize{
 		Space: "0",
-		Images: []vision.MetaImageRecognize{
+		Images: []vision.ImageMeta{
 			{
 				Name: "test_imgs/friends.jpg",
 			},
@@ -49,15 +56,22 @@ func main() {
 		fmt.Printf("persons recognized: %d\n", len(respOk.Body.Objects[0].Persons))
 	}
 
-	// vis.PersonsDelete(vision.MetaDelete{
+	// respOk, respErr := vis.PersonsDelete(vision.MetaDelete{
 	// 	Space: "0",
-	// 	Images: []vision.MetaImageSet{
+	// 	Images: []vision.ImageMeta{
 	// 		{
 	// 			Name:     "test_imgs/rach.jpeg",
 	// 			PersonId: 1,
 	// 		},
 	// 	},
 	// })
+
+	// if respErr != nil {
+	// 	fmt.Printf("error: %s\n", respErr.Body)
+	// } else {
+	// 	fmt.Println("Ok")
+	// 	fmt.Println(respOk)
+	// }
 
 	// respOk, respErr := vis.PersonsTruncate(vision.MetaTruncate{
 	// 	Space: "0",
