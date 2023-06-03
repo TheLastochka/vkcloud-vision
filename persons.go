@@ -31,7 +31,7 @@ type ResponseSetOk struct {
 
 func (vision *visionClient) PersonsSet(meta MetaSet) (*ResponseSetOk, *ResponseError) {
 	requestUrl := vision.persons.domain + "/set?" + "oauth_provider=mcs&oauth_token=" + vision.token
-	body := sendPostRequest(requestUrl, meta)
+	body := sendPostRequest(vision.client, requestUrl, meta)
 
 	var respOk *ResponseSetOk
 	var respErr *ResponseError
@@ -66,7 +66,7 @@ type ResponseRecognizeOk struct {
 				Tag         string   `json:"tag"`
 				Coord       []int    `json:"coord"`
 				Aliases     []string `json:"aliases"`
-				Confindence float64  `json:"confidence"`
+				Confidence  float64  `json:"confidence"`
 				Similarity  float64  `json:"similarity"`
 				Awesomeness float64  `json:"awesomeness"`
 
@@ -82,7 +82,7 @@ type ResponseRecognizeOk struct {
 
 func (vision *visionClient) PersonsRecognize(meta MetaRecognize) (*ResponseRecognizeOk, *ResponseError) {
 	requestUrl := vision.persons.domain + "/recognize?" + "oauth_provider=mcs&oauth_token=" + vision.token
-	body := sendPostRequest(requestUrl, meta)
+	body := sendPostRequest(vision.client, requestUrl, meta)
 
 	var respOk *ResponseRecognizeOk
 	var respErr *ResponseError
@@ -115,7 +115,7 @@ type ResponseDeleteOk struct {
 
 func (vision *visionClient) PersonsDelete(meta MetaDelete) (*ResponseDeleteOk, *ResponseError) {
 	requestUrl := vision.persons.domain + "/delete?" + "oauth_provider=mcs&oauth_token=" + vision.token
-	body := sendPostRequest(requestUrl, meta)
+	body := sendPostRequest(vision.client, requestUrl, meta)
 
 	var respOk *ResponseDeleteOk
 	var respErr *ResponseError
@@ -141,7 +141,7 @@ type ResponseTruncateOk struct {
 
 func (vision *visionClient) PersonsTruncate(meta MetaTruncate) (*ResponseTruncateOk, *ResponseError) {
 	requestUrl := vision.persons.domain + "/truncate?" + "oauth_provider=mcs&oauth_token=" + vision.token
-	body := sendPostRequest(requestUrl, meta)
+	body := sendPostRequest(vision.client, requestUrl, meta)
 
 	var respOk *ResponseTruncateOk
 	var respErr *ResponseError

@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"net/textproto"
 	"os"
-	"time"
 )
 
 type ResponseError struct {
@@ -35,7 +34,7 @@ func buildBody(meta interface{}, boundary string) io.Reader {
 	var strct structWithImages
 	err := json.Unmarshal(metaBytes, &strct)
 	if err != nil {
-		log.Fatal("Error unmarshaling meta")
+		log.Fatal("Error unmarshaling meta: ", err)
 	}
 	var imageNames []string
 	for _, image := range strct.Images {
@@ -80,25 +79,24 @@ func randStringBytes(n int) string {
 // sendPostRequest sends POST request to requestUrl with meta as body
 // meta - struct with request params (meta)
 // if meta contains images, they would be added to request body
-func sendPostRequest(requestUrl string, meta interface{}) []byte {
+func sendPostRequest(client *http.Client, requestUrl string, meta interface{}) []byte {
 	boundary := randStringBytes(30)
 	requestBody := buildBody(meta, boundary)
 	req, err := http.NewRequest("POST", requestUrl, requestBody)
 	if err != nil {
-		log.Fatal("Error creating request")
+		log.Fatal("Error creating request: ", err)
 	}
 	req.Header.Set("Content-Type", "multipart/form-data; boundary="+boundary)
 
-	client := &http.Client{Timeout: time.Second * 10}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal("Error sending request")
+		log.Fatal("Error sending request: ", err)
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal("Error reading response body")
+		log.Fatal("Error reading response body: ", err)
 	}
 	return body
 }

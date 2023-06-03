@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
+	"time"
 
 	vision "github.com/TheLastochka/vkcloud-vision"
 
@@ -18,7 +20,11 @@ func main() {
 		log.Fatal("AI_VISION_TOKEN is not set")
 	}
 
-	vis := vision.NewVisionClient(token)
+	client := &http.Client{
+		Timeout: 15 * time.Second,
+	}
+
+	vis := vision.NewVisionClient(client, token)
 
 	// respOk, respErr := vis.PersonsSet(vision.MetaSet{
 	// 	Space: "0",
@@ -29,7 +35,6 @@ func main() {
 	// 		},
 	// 	},
 	// })
-
 	// if respErr != nil {
 	// 	fmt.Printf("error: %s\n", respErr.Body)
 	// } else {
@@ -47,7 +52,6 @@ func main() {
 		CreateNew:       false,
 		UpdateEmbedding: false,
 	})
-
 	if respErr != nil {
 		fmt.Printf("error: %s\n", respErr.Body)
 	} else {
@@ -65,7 +69,6 @@ func main() {
 	// 		},
 	// 	},
 	// })
-
 	// if respErr != nil {
 	// 	fmt.Printf("error: %s\n", respErr.Body)
 	// } else {
