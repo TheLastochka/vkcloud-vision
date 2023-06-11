@@ -34,7 +34,7 @@ func buildBody(meta interface{}, boundary string) io.Reader {
 	var strct structWithImages
 	err := json.Unmarshal(metaBytes, &strct)
 	if err != nil {
-		log.Fatal("Error unmarshaling meta: ", err)
+		log.Panicln("Error unmarshaling meta: ", err)
 	}
 	var imageNames []string
 	for _, image := range strct.Images {
@@ -84,19 +84,19 @@ func sendPostRequest(client *http.Client, requestUrl string, meta interface{}) [
 	requestBody := buildBody(meta, boundary)
 	req, err := http.NewRequest("POST", requestUrl, requestBody)
 	if err != nil {
-		log.Fatal("Error creating request: ", err)
+		log.Panicln("Error creating request: ", err)
 	}
 	req.Header.Set("Content-Type", "multipart/form-data; boundary="+boundary)
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal("Error sending request: ", err)
+		log.Panicln("Error sending request: ", err)
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal("Error reading response body: ", err)
+		log.Panicln("Error reading response body: ", err)
 	}
 	return body
 }

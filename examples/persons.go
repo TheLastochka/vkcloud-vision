@@ -17,7 +17,7 @@ func main() {
 	godotenv.Load()
 	token := os.Getenv("AI_VISION_TOKEN")
 	if token == "" {
-		log.Fatal("AI_VISION_TOKEN is not set")
+		log.Panicln("AI_VISION_TOKEN is not set")
 	}
 
 	client := &http.Client{

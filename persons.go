@@ -37,7 +37,7 @@ func (vision *visionClient) PersonsSet(meta MetaSet) (*ResponseSetOk, *ResponseE
 	var respErr *ResponseError
 	err := unmarshalResponse(body, &respOk, &respErr)
 	if err != nil {
-		log.Fatal("Error unmarshaling body: " + string(body))
+		log.Panicln("Error unmarshaling body: " + string(body))
 	}
 	return respOk, respErr
 }
@@ -88,7 +88,7 @@ func (vision *visionClient) PersonsRecognize(meta MetaRecognize) (*ResponseRecog
 	var respErr *ResponseError
 	err := unmarshalResponse(body, &respOk, &respErr)
 	if err != nil {
-		log.Fatal("Error unmarshaling body: " + string(body))
+		log.Panicln("Error unmarshaling body: " + string(body))
 	}
 	return respOk, respErr
 }
@@ -121,7 +121,7 @@ func (vision *visionClient) PersonsDelete(meta MetaDelete) (*ResponseDeleteOk, *
 	var respErr *ResponseError
 	err := unmarshalResponse(body, &respOk, &respErr)
 	if err != nil {
-		log.Fatal("Error unmarshaling body: " + string(body))
+		log.Panicln("Error unmarshaling body: " + string(body))
 	}
 	return respOk, respErr
 }
@@ -147,7 +147,7 @@ func (vision *visionClient) PersonsTruncate(meta MetaTruncate) (*ResponseTruncat
 	var respErr *ResponseError
 	err := unmarshalResponse(body, &respOk, &respErr)
 	if err != nil {
-		log.Fatal("Error unmarshaling body: " + string(body))
+		log.Panicln("Error unmarshaling body: " + string(body))
 	}
 	return respOk, respErr
 }
