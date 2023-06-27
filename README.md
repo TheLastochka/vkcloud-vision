@@ -83,11 +83,6 @@ Features
 
 * Without external dependencies
 
-Requirements
------------
-
-* Need at least `go1.19` or newer.
-
 Documentation
 -----------
 
